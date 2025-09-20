@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class App extends Application {
 
     @Override
@@ -13,6 +15,9 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/gridpane.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
+
+        String url = Objects.requireNonNull(getClass().getResource("/css/styles.css")).toString();
+        scene.getStylesheets().add(url);
 
         stage.setScene(scene);
         stage.setTitle("FlowPane Alignment");

@@ -1,0 +1,8 @@
+.gridpane {
+    -fx-padding: 10px;
+}
+
+.lblDatos {
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+}
