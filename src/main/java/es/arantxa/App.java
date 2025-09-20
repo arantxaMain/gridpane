@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
@@ -17,6 +19,8 @@ import java.util.Objects;
  */
 public class App extends Application {
 
+    private static final Logger logger = LoggerFactory.getLogger(App.class);
+
     /**
      * Función que se ejecuta al iniciar la aplicación.
      * Carga la interfaz definida en "gridpane.fxml", aplica los estilos CSS
@@ -26,21 +30,29 @@ public class App extends Application {
      * @throws Exception si ocurre un error al cargar el FXML
      */
     @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/gridpane.fxml"));
-        Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root);
+    public void start(Stage stage) {
+        logger.info("Iniciando la aplicación");
 
-        String url = Objects.requireNonNull(getClass().getResource("/css/styles.css")).toString();
-        scene.getStylesheets().add(url);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/gridpane.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
 
-        stage.setScene(scene);
-        stage.setTitle("Gridpane Alignment");
-        stage.setMinHeight(300);
-        stage.setMinWidth(500);
-        stage.setMaxHeight(500);
-        stage.setMaxWidth(800);
-        stage.show();
+            String url = Objects.requireNonNull(getClass().getResource("/css/styles.css")).toString();
+            scene.getStylesheets().add(url);
+
+            stage.setScene(scene);
+            stage.setTitle("FlowPane Alignment");
+            stage.setMinHeight(300);
+            stage.setMinWidth(500);
+            stage.setMaxHeight(500);
+            stage.setMaxWidth(800);
+            stage.show();
+
+            logger.info("Aplicación lanzada correctamente");
+        } catch (Exception e) {
+            logger.error("Error al iniciar la aplicación", e);
+        }
     }
 
     /**
