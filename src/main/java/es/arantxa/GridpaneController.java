@@ -32,7 +32,7 @@ public class GridpaneController {
     /**
      * Evento que se dispara al pulsar el botón "OK".
      * Añade el texto del TextField de nombre al final del TextArea de descripción.
-     * Si ya hay contenido, se añade detrás.
+     * Si ya hay contenido, se añade en la siguiente línea.
      *
      * @param event el evento de acción generado al pulsar el botón
      */
@@ -40,6 +40,9 @@ public class GridpaneController {
     void btnOkClick(ActionEvent event) {
         String nameText = txtName.getText().trim();
         if (!nameText.isEmpty()) {
+            if (!txtDescription.getText().isEmpty()) {
+                txtDescription.appendText("\n");
+            }
             txtDescription.appendText(nameText);
             txtName.clear();
             logger.info("Texto añadido: {}", nameText);
